@@ -1,5 +1,6 @@
 const getData = async () => {
-    const res = await fetch('http://localhost:3000/api/posts');
+    // const res = await fetch('http://localhost:3000/api/posts');
+    const res = await fetch('/api/posts');
     if (!res.ok) {
         throw new Error('Failed to fetch posts');
     }

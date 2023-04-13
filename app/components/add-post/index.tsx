@@ -2,13 +2,19 @@
 
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
+import useSWR from 'swr';
 import classNames from 'classnames';
 
 type FormValues = {
     text: string;
 };
 
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
 export const AddPost = () => {
+    const { data, error } = useSWR('/api/posts', fetcher);
+    console.log(data);
+
     const { register, handleSubmit, reset } = useForm<FormValues>();
     const addPost = async () => {
         await handleSubmit(async (data) => {
