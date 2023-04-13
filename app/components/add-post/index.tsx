@@ -3,12 +3,14 @@
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
 import classNames from 'classnames';
+import { useRouter } from 'next/navigation';
 
 type FormValues = {
     text: string;
 };
 
 export const AddPost = () => {
+    const router = useRouter();
     const { register, handleSubmit, reset } = useForm<FormValues>();
     const addPost = async () => {
         await handleSubmit(async (data) => {
@@ -17,6 +19,7 @@ export const AddPost = () => {
                 body: JSON.stringify(data)
             });
             console.log(res);
+            router.refresh();
             reset();
         })();
     };
